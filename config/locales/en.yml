@@ -28,4 +28,7 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  products:
+    index:
+      title: "Products"
+      description: "A list of all the products in your account including their name."
