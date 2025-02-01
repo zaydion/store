@@ -45,6 +45,13 @@
             </div>
           </div>
 
+          <div class="col-span-full">
+            <%= form.label :inventory_count, class: "block text-sm/6 font-medium text-gray-900" %>
+            <div class="mt-2">
+              <%= form.number_field :inventory_count, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6", id: "inventory_count", placeholder: "10" %>
+            </div>
+          </div>
+
           <div class="col-span-full" data-controller="file-previews">
             <p class="block text-sm/6 font-medium text-gray-900">Featured Image</p>
             <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "products#index"
 
-  resources :products
+  resources :products do
+    resources :subscribers, only: [:create]
+  end
   resource :session
   resources :passwords, param: :token
 

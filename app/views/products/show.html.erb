@@ -73,96 +73,100 @@
         </div>
 
         <div class="mt-8 lg:col-span-5">
-          <form>
-            <!-- Color picker -->
-            <div>
-              <h2 class="text-sm font-medium text-gray-900">Color</h2>
+          <% if @product.inventory_count.zero? %>
+            <%= render 'inventory', product: @product %>
+          <% else %>
+            <form>
+              <!-- Color picker -->
+              <div>
+                <h2 class="text-sm font-medium text-gray-900">Color</h2>
 
-              <fieldset aria-label="Choose a color" class="mt-2">
-                <div class="flex items-center gap-x-3">
-                  <!-- Active and Checked: "ring ring-offset-1" -->
-                  <label aria-label="Black" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-900 focus:outline-none">
-                    <input type="radio" name="color-choice" value="Black" class="sr-only">
-                    <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-900"></span>
-                  </label>
-                  <!-- Active and Checked: "ring ring-offset-1" -->
-                  <label aria-label="Heather Grey" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
-                    <input type="radio" name="color-choice" value="Heather Grey" class="sr-only">
-                    <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-400"></span>
-                  </label>
-                </div>
-              </fieldset>
-            </div>
-
-            <!-- Size picker -->
-            <div class="mt-8">
-              <div class="flex items-center justify-between">
-                <h2 class="text-sm font-medium text-gray-900">Size</h2>
-                <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">See sizing chart</a>
+                <fieldset aria-label="Choose a color" class="mt-2">
+                  <div class="flex items-center gap-x-3">
+                    <!-- Active and Checked: "ring ring-offset-1" -->
+                    <label aria-label="Black" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-900 focus:outline-none">
+                      <input type="radio" name="color-choice" value="Black" class="sr-only">
+                      <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-900"></span>
+                    </label>
+                    <!-- Active and Checked: "ring ring-offset-1" -->
+                    <label aria-label="Heather Grey" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
+                      <input type="radio" name="color-choice" value="Heather Grey" class="sr-only">
+                      <span aria-hidden="true" class="size-8 rounded-full border border-black/10 bg-gray-400"></span>
+                    </label>
+                  </div>
+                </fieldset>
               </div>
 
-              <fieldset aria-label="Choose a size" class="mt-2">
-                <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XXS" class="sr-only">
-                    <span>XXS</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XS" class="sr-only">
-                    <span>XS</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="S" class="sr-only">
-                    <span>S</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="M" class="sr-only">
-                    <span>M</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="L" class="sr-only">
-                    <span>L</span>
-                  </label>
-                  <!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-indigo-500 ring-offset-2"
-                    Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
-                  -->
-                  <label class="flex cursor-not-allowed items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase opacity-25 sm:flex-1">
-                    <input type="radio" name="size-choice" value="XL" disabled class="sr-only">
-                    <span>XL</span>
-                  </label>
+              <!-- Size picker -->
+              <div class="mt-8">
+                <div class="flex items-center justify-between">
+                  <h2 class="text-sm font-medium text-gray-900">Size</h2>
+                  <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">See sizing chart</a>
                 </div>
-              </fieldset>
-            </div>
 
-            <button type="submit" class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to cart</button>
-          </form>
+                <fieldset aria-label="Choose a size" class="mt-2">
+                  <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
+                      <input type="radio" name="size-choice" value="XXS" class="sr-only">
+                      <span>XXS</span>
+                    </label>
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
+                      <input type="radio" name="size-choice" value="XS" class="sr-only">
+                      <span>XS</span>
+                    </label>
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
+                      <input type="radio" name="size-choice" value="S" class="sr-only">
+                      <span>S</span>
+                    </label>
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
+                      <input type="radio" name="size-choice" value="M" class="sr-only">
+                      <span>M</span>
+                    </label>
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase focus:outline-none sm:flex-1">
+                      <input type="radio" name="size-choice" value="L" class="sr-only">
+                      <span>L</span>
+                    </label>
+                    <!--
+                      In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
+                      Active: "ring-2 ring-indigo-500 ring-offset-2"
+                      Checked: "border-transparent bg-indigo-600 text-white hover:bg-indigo-700", Not Checked: "border-gray-200 bg-white text-gray-900 hover:bg-gray-50"
+                    -->
+                    <label class="flex cursor-not-allowed items-center justify-center rounded-md border px-3 py-3 text-sm font-medium uppercase opacity-25 sm:flex-1">
+                      <input type="radio" name="size-choice" value="XL" disabled class="sr-only">
+                      <span>XL</span>
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <button type="submit" class="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to cart</button>
+            </form>
+          <% end %>
 
           <!-- Product details -->
           <div class="mt-10">
