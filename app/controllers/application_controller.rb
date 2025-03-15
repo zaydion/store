@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+  inertia_share do
+    {
+      flash: { notice: flash.notice, alert: flash.alert },
+      current_user: {
+        auth: authenticated? || {},
+      },
+    }
+  end
+
   include Authentication
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern

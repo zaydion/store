@@ -1,12 +1,29 @@
 class ProductsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
-  before_action :set_product, only: %i[show edit update destroy]
+  before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
-    @products = Product.all
+    render inertia: 'Products/Index', props: {
+      products: Product.all.map do |product|
+        product.as_json(
+          only: [ :id, :name, :description, :inventory_count ]
+        ).merge(
+          show_url: product_path(product),
+        )
+      end
+    }
   end
 
   def show
+    render inertia: "Products/Show", props: {
+      product: @product.as_json(
+        only: [ :id, :name, :description, :inventory_count ]
+      ).merge(
+        featured_image_url: @product.featured_image.attached? ? url_for(@product.featured_image) : "",
+        is_out_of_stock: @product.inventory_count.zero?,
+        delete_url: product_path(@product),
+      )
+    }
   end
 
   def new
