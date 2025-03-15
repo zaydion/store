@@ -28,6 +28,10 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+
+    render inertia: "Products/New", props: {
+      product: @product
+    }
   end
 
   def create
@@ -36,18 +40,21 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to @product
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_product_url, inertia: { errors: @product.errors }
     end
   end
 
   def edit
+    render inertia: "Products/Edit", props: {
+      product: @product
+    }
   end
 
   def update
     if @product.update(product_params)
       redirect_to @product
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to edit_product_url, inertia: { errors: @product.errors }
     end
   end
 

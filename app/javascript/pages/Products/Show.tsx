@@ -2,7 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { type PageProps } from '../../Layouts/AppLayout'
 import OutOfStockForm from './components/OutOfStockForm'
 
-type Product = {
+export type Product = {
   id: number
   name: string
   description: string
@@ -19,7 +19,8 @@ export default function Show({ product }: { product: Product }) {
 
   const isAuthenticated = !!auth?.user_id
 
-  const confirmDelete = () => {
+  const confirmDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     if (confirm('Are you sure you want to delete this product?')) {
       router.delete(product.delete_url)
     }
@@ -66,12 +67,12 @@ export default function Show({ product }: { product: Product }) {
           </li>
           <li className="ml-auto">
             {isAuthenticated ? (
-              <a
+              <Link
                 className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                href={`/products/edit/${product.id}`}
+                href={`/products/${product.id}/edit`}
               >
                 Edit product
-              </a>
+              </Link>
             ) : null}
           </li>
         </ol>
