@@ -42,7 +42,7 @@ gem "image_processing", "~> 1.2"
 
 gem "tailwindcss-ruby", "~> 4.0"
 
-gem "tailwindcss-rails", "~> 3.3"
+gem "tailwindcss-rails", "~> 4.2"
 
 gem "inertia_rails", "~> 3.6"
 
