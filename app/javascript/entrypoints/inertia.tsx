@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import AppLayout from '../Layouts/AppLayout'
+import PublicLayout from '../Layouts/PublicLayout'
 
 // Temporary type definition, until @inertiajs/react provides one
 type ResolvedComponent = {
@@ -33,7 +34,7 @@ createInertiaApp({
 
     // @ts-expect-error
     page.default!.layout = name.startsWith('Public/')
-      ? undefined
+      ? (page: string) => <PublicLayout children={page} />
       : (page: string) => <AppLayout children={page} />
     return page
   },
