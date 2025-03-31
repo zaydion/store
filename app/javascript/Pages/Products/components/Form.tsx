@@ -12,12 +12,13 @@ export type FormProduct = {
 
 function Form({ product }: { product: FormProduct }) {
   const { errors } = usePage().props
+
   const { data, setData, post, put } = useForm({
     product: {
-      name: '',
-      description: '',
-      inventory_count: '',
-      featured_image: null,
+      name: product?.name || '',
+      description: product?.description || '',
+      inventory_count: product?.inventory_count || '',
+      featured_image: product?.featured_image_url || '',
     },
   })
 
