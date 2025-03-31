@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
     @product = Product.new
 
     render inertia: "Products/New", props: {
-      product: @product
+      product: @product.as_json(only: [ :name, :description, :inventory_count ])
     }
   end
 
@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
 
   def edit
     render inertia: "Products/Edit", props: {
-      product: @product
+      product: @product.as_json(only: [ :id, :name, :description, :featured_image, :inventory_count ])
     }
   end
 

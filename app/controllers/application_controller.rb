@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
     {
       flash: { notice: flash.notice, alert: flash.alert },
       current_user: {
-        auth: authenticated? || {},
+        auth: authenticated?&.as_json(
+          only: %i[ user_id ],
+        ) || {},
       },
     }
   end

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, router, usePage } from '@inertiajs/react'
+import { Head, Link, router, usePage } from '@inertiajs/react'
 import AppNotice from '../Pages/components/AppNotice'
 
 import { useState } from 'react'
@@ -40,14 +40,17 @@ export type PageProps = {
     auth: AuthType
   }
 }
+type PageUrl = {
+  url: string
+}
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
-  { name: 'Team', href: '/', icon: UsersIcon, current: false },
-  { name: 'Products', href: '/products', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '/', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '/', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '/', icon: ChartPieIcon, current: false },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Team', href: '/team', icon: UsersIcon },
+  { name: 'Products', href: '/products', icon: FolderIcon },
+  { name: 'Calendar', href: '/calendar', icon: CalendarIcon },
+  { name: 'Documents', href: '/documents', icon: DocumentDuplicateIcon },
+  { name: 'Reports', href: '/reports', icon: ChartPieIcon },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '/', initial: 'H', current: false },
@@ -64,17 +67,23 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     current_user: { auth },
   } = usePage<PageProps>().props
 
+  const currentPath = usePage<PageUrl>().url
+
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   const isAuthenticated = !!auth?.user_id
 
   const signOut = () => {
     router.delete('/session')
   }
-  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
     <>
+      <Head>
+        <title>Store</title>
+        <meta name="description" content="Your page description" />
+      </Head>
       {/* TODO: Create NavigationSidebar component */}
-
       <div>
         <Dialog
           open={sidebarOpen}
@@ -124,7 +133,9 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                             <Link
                               href={item.href}
                               className={classNames(
-                                item.current
+                                item.href === currentPath ||
+                                  (item.href === '/products' &&
+                                    currentPath === '/')
                                   ? 'bg-gray-800 text-white'
                                   : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                                 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
@@ -204,7 +215,8 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                         <Link
                           href={item.href}
                           className={classNames(
-                            item.current
+                            item.href === currentPath ||
+                              (item.href === '/products' && currentPath === '/')
                               ? 'bg-gray-800 text-white'
                               : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                             'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
